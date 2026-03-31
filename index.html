@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--
+  Aidan McCauley — static site
+  - index.html  = structure (what appears on the page)
+  - styles.css   = look & layout (colors, spacing, fonts). Start in :root for easy tweaks.
+  - script.js    = behavior (nav, portfolio lightbox, reduced-motion GIF swap)
+  - site-content.js = editable text & portfolio image list
+  - 404.html = friendly “page not found” (used automatically on GitHub Pages)
+  - GITHUB-PAGES.md = hosting + custom domain (see README)
+-->
+<html lang="en">
+<head>
+  <!-- Basic SEO + social preview (og:* / twitter:*). Change title + descriptions here. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aidan McCauley</title>
+  <meta name="description" content="Aidan McCauley - portfolio, contact, and about.">
+  <meta property="og:title" content="Aidan McCauley">
+  <meta property="og:description" content="Portfolio, contact details, and creative work by Aidan McCauley.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/am.png">
+  <meta property="og:image:alt" content="Aidan McCauley logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aidan McCauley">
+  <meta name="twitter:description" content="Portfolio, contact details, and creative work by Aidan McCauley.">
+  <meta name="twitter:image" content="assets/am.png">
+  <link rel="icon" type="image/png" href="assets/am.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Main stylesheet: open styles.css; design tokens are at the top in :root -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+  <!-- Accessibility: keyboard users can jump straight to <main> -->
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <!-- ===== TOP NAV: logo + section jumps (desktop row / mobile opens sheet below) ===== -->
+  <nav aria-label="Primary">
+    <div class="logo-wrap">
+      <img class="logo-mark" src="assets/am.png" alt="" aria-hidden="true">
+      <button class="logo-toggle" id="logoToggle" aria-expanded="false" aria-controls="mobilePanel">
+        <img src="assets/am.png" alt="">
+        <span class="sr-only">Open section menu</span>
+      </button>
+    </div>
+
+    <ul class="desktop-nav" id="desktopNav">
+      <li class="desktop-nav-item" data-section="contact">
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-contact">
+          <img class="nav-label-img" src="assets/contact.png" alt="Contact">
+        </button>
+        <!-- Submenus (random emoji / color links): re-enable via ENABLE_SECTION_DROPDOWNS in script.js -->
+        <ul class="dropdown" id="desk-contact"></ul>
+      </li>
+      <li class="desktop-nav-item" data-section="about">
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-about">
+          <img class="nav-label-img" src="assets/about.png" alt="About">
+        </button>
+        <ul class="dropdown" id="desk-about"></ul>
+      </li>
+      <li class="desktop-nav-item" data-section="portfolio">
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-portfolio">
+          <img class="nav-label-img" src="assets/portfolio.png" alt="Portfolio">
+        </button>
+        <ul class="dropdown" id="desk-portfolio"></ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Mobile-only full-screen menu (hidden on wide screens via CSS) -->
+  <div class="mobile-panel" id="mobilePanel" aria-label="Mobile section menu">
+    <div class="mobile-menu-grid">
+      <div class="mobile-left">
+        <button class="mobile-section-button" type="button" data-section="contact" aria-expanded="false" aria-controls="mobile-group-contact">
+          <img class="nav-label-img" src="assets/contact.png" alt="Contact">
+        </button>
+        <button class="mobile-section-button" type="button" data-section="about" aria-expanded="false" aria-controls="mobile-group-about">
+          <img class="nav-label-img" src="assets/about.png" alt="About">
+        </button>
+        <button class="mobile-section-button" type="button" data-section="portfolio" aria-expanded="false" aria-controls="mobile-group-portfolio">
+          <img class="nav-label-img" src="assets/portfolio.png" alt="Portfolio">
+        </button>
+      </div>
+      <div class="mobile-right">
+        <div class="mobile-right-list" id="mobile-group-contact" data-section="contact">
+          <ul class="mobile-dropdown" id="mobile-contact"></ul>
+        </div>
+        <div class="mobile-right-list" id="mobile-group-about" data-section="about">
+          <ul class="mobile-dropdown" id="mobile-about"></ul>
+        </div>
+        <div class="mobile-right-list" id="mobile-group-portfolio" data-section="portfolio">
+          <ul class="mobile-dropdown" id="mobile-portfolio"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO: full-viewport image, name (h1), intro paragraph ===== -->
+  <header>
+    <div class="hero-inner">
+      <h1><span id="firstName">Aidan</span> <span class="name-last" id="lastName">McCauley</span></h1>
+      <!-- Filled from site-content.js → heroIntroText -->
+      <p class="hero-intro" id="heroIntro"></p>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT: id="content" is the skip-link target ===== -->
+  <main id="content">
+    <!-- Contact links (Instagram + email text comes partly from site-content.js) -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="section-inner">
+        <h2 id="contact-heading">Contact</h2>
+        <div class="contact-wrap">
+          <div class="contact-links">
+            <p>
+              <a id="instagramLink" href="#" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <span aria-hidden="true">📸</span> <span id="instagramLabel">Instagram</span>: <span id="instagramHandle"></span>
+              </a>
+            </p>
+            <p>
+              <a id="emailLink" href="mailto:" aria-label="Email">
+                <span aria-hidden="true">✉️</span> <span id="emailLabel">Email</span>: <span id="emailAddress"></span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About copy: long paragraph; editable in site-content.js as aboutText -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-inner">
+        <h2 id="about-heading">About</h2>
+        <!-- Filled from site-content.js → aboutText -->
+        <p class="about-copy" id="aboutCopy"></p>
+      </div>
+    </section>
+
+    <!-- Portfolio: tracks are empty here; script.js fills them from site-content.js lists -->
+    <section id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="section-inner">
+        <h2 id="portfolio-heading">Portfolio</h2>
+        <div class="portfolio-block">
+          <h3 id="portfolio-art-heading" class="portfolio-subheading">Art</h3>
+          <div class="portfolio-track" id="portfolioTrackArt" aria-labelledby="portfolio-art-heading"></div>
+        </div>
+        <div class="portfolio-block">
+          <h3 id="portfolio-advertising-heading" class="portfolio-subheading">Advertising</h3>
+          <div class="portfolio-track" id="portfolioTrackAdvertising" aria-labelledby="portfolio-advertising-heading"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER: back-to-top + copyright (colors in styles.css / :root) ===== -->
+  <footer>
+    <button class="footer-top" id="backToTop" type="button" aria-label="Back to top">⬆️  ⬆️  ⬆️</button>
+    <p class="footer-note" id="footerNote">© 2026 Aidan McCauley. Thanks for dropping by.</p>
+  </footer>
+
+  <!--
+    Portfolio lightbox (hidden until script opens it).
+    Overlay + button colors are styled in styles.css (.carousel-modal, .carousel-shell, …).
+  -->
+  <div class="carousel-modal" id="carouselModal" role="dialog" aria-modal="true" aria-label="Portfolio image viewer">
+    <div class="carousel-shell">
+      <div class="carousel-top">
+        <button class="carousel-close" id="carouselClose" type="button" aria-label="Close image viewer">X</button>
+      </div>
+      <img class="carousel-media" id="carouselMedia" src="" alt="">
+      <div class="carousel-controls">
+        <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Previous image">←</button>
+        <p class="carousel-caption" id="carouselCaption"></p>
+        <button class="carousel-arrow" id="carouselNext" type="button" aria-label="Next image">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional content overrides, then site behaviors (defer = run after HTML is parsed) -->
+  <script src="site-content.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

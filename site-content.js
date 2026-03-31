@@ -1,0 +1,103 @@
+/**
+ * ===========================================================================
+ * YOUR EDITABLE SITE SETTINGS (JavaScript file — works like a config sheet)
+ * ===========================================================================
+ * How to use:
+ * 1. Open this file in any text editor (TextEdit, Notepad, VS Code).
+ * 2. Change the text inside the "quote marks" only — see sections below.
+ * 3. Save the file. Refresh the website in your browser to see changes.
+ *
+ * Do NOT delete the commas between items. Do NOT remove the { } brackets.
+ * If something breaks, you can copy this file from a backup or re-download.
+ *
+ * This is NOT strict JSON (JSON needs double quotes everywhere); it is a
+ * JavaScript object, which is more forgiving.
+ * ===========================================================================
+ */
+
+window.SITE_CONTENT = {
+  /* ----- Big name at the top of the page (header, browser tab, search snippets) ----- */
+  profile: {
+    firstName: "Aidan",
+    lastName: "McCauley",
+
+    /* Words shown before the Instagram handle and email (usually "Instagram" and "Email") */
+    instagramLabel: "Instagram",
+    emailLabel: "Email",
+
+    /* What visitors see after "Instagram:" — usually your @handle */
+    instagramHandle: "@aidan_mccauley",
+
+    /* Full web address when someone clicks Instagram — must start with https:// */
+    instagramUrl: "https://instagram.com/aidan_mccauley",
+
+    /* Email shown and used when someone clicks the email line */
+    email: "aidan@example.com"
+  },
+
+  /*
+   * Gray / green box under your name on the first screen.
+   * One continuous piece of text inside quote marks. You can use apostrophes inside
+   * the sentence (like "I'm") — that's fine.
+   */
+  heroIntroText:
+    "I'm an advertising creative and artist who believes in getting hands-on with the work. This site is coded from scratch, not using a template, and is an ultralight space that reflects how I think and make. My approach to both art and advertising is the same: cut through the clutter, resist oversaturation, and create work that feels intentional. This design draws from early internet nostalgia paired with modern clarity.",
+
+  /*
+   * About section — the long paragraph on the About page.
+   * Paste your bio as one block of text.
+   */
+  aboutText:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis sem ut mi posuere tincidunt. Nam rutrum placerat turpis, id congue elit consequat ut. Mauris ut justo non urna ultrices aliquet. Nulla facilisi. Donec posuere sem a mi luctus, non gravida nibh egestas. Curabitur vel dui malesuada, volutpat est ac, luctus mi. Vivamus ultrices, ex at bibendum convallis, dui justo mattis nibh, in vulputate ipsum est vel turpis. Integer accumsan urna at dui feugiat consequat. Proin fringilla sodales arcu, sed viverra felis iaculis eget. Suspendisse potenti. Cras quis feugiat nisi. In hac habitasse platea dictumst. Maecenas viverra dui vitae odio venenatis, id suscipit magna laoreet. Donec nec risus imperdiet, consectetur magna at, luctus justo. Duis non nisi et metus iaculis ullamcorper. Morbi posuere porttitor dolor vel euismod. Nulla vehicula augue erat, eget posuere massa interdum vitae. Cras eu felis ac tortor feugiat faucibus. Duis vel neque non nisi volutpat rhoncus. Donec sodales lectus sed risus gravida, ac aliquet magna feugiat. Sed posuere cursus lectus, vitae vulputate ipsum suscipit sit amet. Suspendisse eget sem et diam elementum vulputate ut id odio. Vivamus sit amet metus efficitur, placerat nulla ac, bibendum eros. Aliquam erat volutpat.",
+
+  /* Small line at the bottom of the page (copyright or thank-you line) */
+  footerNote: "© 2026 Aidan McCauley. Thanks for dropping by.",
+
+  /*
+   * ART portfolio — horizontal row labeled "Art" on the site.
+   * Each item is one picture. Add or remove whole { ... } blocks.
+   *
+   *   src     — path to your image file (usually starts with "assets/")
+   *   caption — short title; shows under the thumbnail and in the pop-up carousel
+   *   alt     — image description for accessibility / screen readers (be specific)
+   */
+  artPortfolioItems: [
+    { src: "assets/art/am_001.jpg", caption: "Art 001", alt: "Art portfolio image 001 — describe the work here" },
+    { src: "assets/art/am_002.jpg", caption: "Art 002", alt: "Art portfolio image 002 — describe the work here" },
+    { src: "assets/art/am_003.jpg", caption: "Art 003", alt: "Art portfolio image 003 — describe the work here" },
+    { src: "assets/art/am_004.jpg", caption: "Art 004", alt: "Art portfolio image 004 — describe the work here" },
+    { src: "assets/art/am_005.jpg", caption: "Art 005", alt: "Art portfolio image 005 — describe the work here" },
+    { src: "assets/art/am_006.jpg", caption: "Art 006", alt: "Art portfolio image 006 — describe the work here" },
+    { src: "assets/art/am_009.jpg", caption: "Art 009", alt: "Art portfolio image 009 — describe the work here" },
+    { src: "assets/art/am_010.jpg", caption: "Art 010", alt: "Art portfolio image 010 — describe the work here" },
+    { src: "assets/art/am_011.jpg", caption: "Art 011", alt: "Art portfolio image 011 — describe the work here" },
+    { src: "assets/art/am_012.jpg", caption: "Art 012", alt: "Art portfolio image 012 — describe the work here" }
+  ],
+
+  /*
+   * ADVERTISING portfolio — horizontal row labeled "Advertising".
+   * Same three fields as art: src, caption, alt.
+   */
+  advertisingPortfolioItems: [
+    {
+      src: "assets/advertising/mcCauley_1Password_001.png",
+      caption: "Advertising 001",
+      alt: "Describe this campaign piece for screen readers"
+    },
+    {
+      src: "assets/advertising/mcCauley_1Password_002.png",
+      caption: "Advertising 002",
+      alt: "Describe this campaign piece for screen readers"
+    },
+    {
+      src: "assets/advertising/mcCauley_1Password_003.png",
+      caption: "Advertising 003",
+      alt: "Describe this campaign piece for screen readers"
+    },
+    {
+      src: "assets/advertising/mcCauley_1Password_004.png",
+      caption: "Advertising 004",
+      alt: "Describe this campaign piece for screen readers"
+    }
+  ]
+};

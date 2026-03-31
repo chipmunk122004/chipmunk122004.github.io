@@ -1,0 +1,990 @@
+/* =============================================================================
+   STYLESHEET MAP (read top to bottom)
+   - Design tokens live in :root (colors, borders, spacing). Tweak there first.
+   - Layout blocks are grouped: reset → nav → header hero → main → footer → carousel
+   - Search for "===== NAV" etc. to jump between sections.
+   ============================================================================= */
+
+:root {
+  /* ----- Borders — WIDTH + COLOR; nav/sections use var(--border). No full-page frame. -----
+  */
+  --border-width: 1.5px;
+  --border-color: #000;
+  --border: var(--border-width) solid var(--border-color);
+
+  /* Brand / layout colors */
+  --nav-height: 10vh;
+  --nav-bg: #6d7356;
+  --main-bg: #cdd7c5;
+  --content-max: 800px;
+
+  /* Section padding inside <main> (each .section-inner) */
+  --section-pad-inline: clamp(1.2rem, 3vw, 2.5rem);
+  --section-pad-top: clamp(2rem, 4.6vw, 3.2rem);
+  --section-pad-bottom: clamp(2rem, 4.6vw, 3.2rem);
+
+  --portfolio-track-gap: 1rem;
+
+  /* Fonts — change names here; if using Google Fonts, update the <link> in index.html too. */
+  --font-body: "Barlow", Arial, Helvetica, sans-serif;
+  --font-heading: "Arial Black", "Arial Bold", Arial, Helvetica, sans-serif;
+
+  /*
+    Dark glass behind hero paragraph + portfolio lightbox (full-screen dim).
+    Change the last number (0.56) for more/less see-through (0 = invisible, 1 = solid).
+  */
+  --hero-overlay-bg: rgba(26, 31, 20, 0.56);
+  --hero-overlay-blur: 1px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ----- Page base ----- */
+body {
+  font-family: var(--font-body);
+  background: #fff;
+  color: #000;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/*
+  No body::before frame — horizontal rules come from:
+  - header { border-bottom }  → between hero and <main>
+  - last <main> section + footer { border-bottom } → between content and footer, footer and page end
+*/
+
+a {
+  color: inherit;
+}
+
+main a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+
+main a:active {
+  opacity: 0.88;
+}
+
+main a:focus-visible {
+  outline: 2px dashed var(--border-color);
+  outline-offset: 3px;
+}
+
+/* Screen-reader “skip to content” link; styled when focused */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 6000;
+  background: #fff;
+  border: var(--border);
+  padding: 0.5rem 0.8rem;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* ===== NAV (fixed bar) ===== */
+nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-height);
+  border-bottom: var(--border);
+  background: var(--nav-bg);
+  z-index: 4500;
+  display: flex;
+  align-items: stretch;
+}
+
+.logo-wrap {
+  border-right: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-width: clamp(128px, 20vw, 260px);
+  min-height: 0;
+  padding: 1.5vh 2.8rem;
+  background: var(--nav-bg);
+}
+
+.logo-mark {
+  --logo-box: calc(var(--nav-height) - 3vh);
+  max-width: 100%;
+  max-height: var(--logo-box);
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+.logo-toggle {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  align-self: stretch;
+  max-height: 100%;
+  min-height: 0;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-toggle img {
+  --logo-box: calc(var(--nav-height) - 3vh);
+  max-width: 100%;
+  max-height: var(--logo-box);
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+.desktop-nav {
+  list-style: none;
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+}
+
+.desktop-nav-item {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  border-left: var(--border);
+  position: relative;
+}
+
+.desktop-nav-item:first-child {
+  border-left: 0;
+}
+
+.desktop-nav-item:last-child {
+  border-right: var(--border);
+}
+
+.menu-button {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 900;
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9vh 0.5rem;
+  color: #f8f8f2;
+  transition: background-color 0.15s ease;
+}
+
+.menu-button:hover:not(:has(.nav-label-img)) {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.menu-button:active:not(:has(.nav-label-img)) {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.nav-label-img {
+  --nav-label-box: calc(var(--nav-height) - 2.8vh);
+  max-width: 100%;
+  max-height: var(--nav-label-box);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+html.no-section-dropdowns .dropdown,
+html.no-section-dropdowns .mobile-right {
+  display: none !important;
+}
+
+html.no-section-dropdowns .mobile-menu-grid {
+  grid-template-columns: 1fr;
+}
+
+.menu-button:focus-visible,
+.logo-toggle:focus-visible,
+.mobile-section-button:focus-visible,
+.footer-top:focus-visible,
+.dropdown a:focus-visible,
+.mobile-dropdown a:focus-visible {
+  outline: 2px dashed #000;
+  outline-offset: -2px;
+}
+
+.dropdown,
+.mobile-dropdown {
+  list-style: none;
+  display: none;
+  border: var(--border);
+  border-top: 0;
+  overflow: hidden;
+}
+
+.desktop-nav-item .dropdown {
+  position: absolute;
+  top: calc(100% + var(--border-width));
+  left: calc(0px - var(--border-width));
+  right: calc(0px - var(--border-width));
+  background: #fff;
+}
+
+.desktop-nav-item:last-child .dropdown {
+  right: 0;
+}
+
+.desktop-nav-item.open .dropdown {
+  display: block;
+}
+
+.dropdown li + li,
+.mobile-dropdown li + li {
+  border-top: var(--border);
+}
+
+.dropdown a,
+.mobile-dropdown a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+  padding: 0.8rem 0.6rem;
+}
+
+/* ===== HEADER (full-viewport hero + name + intro paragraph) ===== */
+header {
+  min-height: 100vh;
+  border-bottom: var(--border);
+  padding: calc(var(--nav-height) + 1.2rem) var(--section-pad-inline) 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  background-image: url("assets/homepageGraphic.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-inner {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 2.2vw, 1.65rem);
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+  text-align: center;
+  margin: 0;
+}
+
+header h1 {
+  color: #fff;
+  text-shadow:
+    0 1px 0 color-mix(in srgb, var(--nav-bg) 72%, black 28%),
+    0 3px 0 color-mix(in srgb, var(--nav-bg) 82%, black 18%),
+    0 7px 14px color-mix(in srgb, var(--nav-bg) 55%, black 45%);
+}
+
+.hero-intro {
+  width: min(100%, 60ch);
+  margin: 0;
+  padding: clamp(0.9rem, 2.1vw, 1.3rem) clamp(1rem, 2.2vw, 1.6rem);
+  font-size: clamp(0.86rem, 1.02vw, 0.96rem);
+  line-height: 1.22;
+  letter-spacing: 0.01em;
+  color: #f5f7ef;
+  text-wrap: balance;
+  background: var(--hero-overlay-bg);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.52) inset,
+    0 8px 26px rgba(0, 0, 0, 0.22),
+    0 2px 6px rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(var(--hero-overlay-blur));
+  -webkit-backdrop-filter: blur(var(--hero-overlay-blur));
+}
+
+.name-last {
+  display: inline;
+}
+
+/* ===== MAIN (contact / about / portfolio) ===== */
+main {
+  background: var(--main-bg);
+}
+
+/* GitHub Pages 404 — see 404.html */
+main.error-page {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  padding: var(--section-pad-top) var(--section-pad-inline) var(--section-pad-bottom);
+  text-align: center;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+main.error-page h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4.5vw, 2.4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+}
+
+main.error-page p {
+  margin: 0 0 1rem;
+  max-width: 26rem;
+  line-height: 1.55;
+}
+
+main.error-page p:last-of-type {
+  margin-bottom: 0;
+}
+
+section {
+  border-bottom: var(--border);
+  min-height: 70vh;
+  display: grid;
+  align-content: stretch;
+  box-shadow:
+    inset 0 12px 14px -14px rgba(0, 0, 0, 0.42),
+    inset 0 -12px 14px -14px rgba(0, 0, 0, 0.42);
+}
+
+#contact {
+  display: flex;
+  flex-direction: column;
+}
+
+#portfolio {
+  min-height: 85vh;
+}
+
+.section-inner {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+  padding: var(--section-pad-top) var(--section-pad-inline) var(--section-pad-bottom);
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+#contact .section-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.2rem, 3.2vw, 2rem);
+  padding-top: clamp(1rem, 2.5vw, 1.65rem);
+  padding-bottom: clamp(1.15rem, 2.8vw, 1.85rem);
+}
+
+#contact .section-inner > h2 {
+  padding-top: 0;
+}
+
+#portfolio .section-inner {
+  min-height: 100%;
+  justify-content: center;
+}
+
+#about .section-inner,
+#portfolio .section-inner {
+  padding-top: clamp(2.6rem, 6vw, 4.2rem);
+  padding-bottom: clamp(3.1rem, 7vw, 5.2rem);
+}
+
+#portfolio .section-inner > h2 {
+  margin-bottom: clamp(0.85rem, 2.2vw, 1.65rem);
+}
+
+.portfolio-block {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+}
+
+.portfolio-subheading {
+  font-size: clamp(1.25rem, 3.2vw, 1.75rem);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  padding-top: 0.15rem;
+}
+
+#portfolio .section-inner > .portfolio-block + .portfolio-block {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+h2 {
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding-top: clamp(0.4rem, 1.2vw, 0.8rem);
+}
+
+.contact-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.contact-links {
+  display: grid;
+  gap: 0.9rem;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+  padding: 0;
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.contact-links p {
+  margin: 0;
+  text-align: center;
+}
+
+.contact-links a {
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.about-copy {
+  column-count: 2;
+  column-gap: clamp(1rem, 4vw, 2.5rem);
+  text-align: justify;
+  padding: clamp(0.8rem, 2.5vw, 1.8rem);
+  font-size: clamp(0.98rem, 1.8vw, 1.15rem);
+}
+
+/* Horizontal scrolling rows for Art + Advertising (#portfolioTrackAdvertising uses flex — see below) */
+.portfolio-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 340px);
+  gap: var(--portfolio-track-gap);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.3rem 0.5rem 0.9rem;
+  background: var(--main-bg);
+  scrollbar-width: thin;
+}
+
+.portfolio-track figure {
+  margin: 0;
+  transition: transform 180ms ease;
+  transform-origin: center;
+}
+
+.portfolio-track img {
+  display: block;
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  background: var(--main-bg);
+  cursor: pointer;
+}
+
+#portfolioTrackAdvertising {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: var(--portfolio-track-gap);
+}
+
+#portfolioTrackAdvertising figure {
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: min(96vw, 1600px);
+}
+
+#portfolioTrackAdvertising figure button {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+}
+
+#portfolioTrackAdvertising img {
+  display: block;
+  height: 340px;
+  width: auto;
+  max-width: min(96vw, 1600px);
+  object-fit: contain;
+  object-position: center;
+  background: var(--main-bg);
+  cursor: pointer;
+}
+
+.portfolio-track figcaption {
+  text-align: center;
+  margin-top: 0.35rem;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  font-size: 0.95rem;
+  min-height: 1.25rem;
+}
+
+.portfolio-track figure:hover,
+.portfolio-track figure:focus-within {
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.portfolio-track figure:hover figcaption,
+.portfolio-track figure:focus-within figcaption {
+  opacity: 1;
+}
+
+/* ===== FOOTER (back-to-top + copyright) ===== */
+footer {
+  border-bottom: var(--border);
+  min-height: 25.5vh;
+  padding: clamp(2.1rem, 5vw, 3.4rem) var(--section-pad-inline)
+    calc(6rem + env(safe-area-inset-bottom));
+  display: grid;
+  place-items: center;
+  row-gap: 1em;
+  text-align: center;
+  background: var(--nav-bg);
+  color: #f8f8f2;
+}
+
+/*
+  Skeuomorphic buttons — footer “up” + lightbox close/arrows share the same visual recipe.
+  Tweak gradient / shadows here to change all of them at once.
+*/
+.footer-top,
+.carousel-close,
+.carousel-arrow {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  border-radius: 14px 9px 13px 10px;
+  background: linear-gradient(145deg, #d9e2d0 0%, #c6d0bc 100%);
+  color: #1e231a;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.08) inset,
+    0 9px 18px rgba(0, 0, 0, 0.26),
+    0 3px 4px rgba(0, 0, 0, 0.16);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.footer-top {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  letter-spacing: 0.08em;
+  white-space: pre;
+  text-transform: uppercase;
+  padding: 0.7rem 1.15rem;
+  min-width: auto;
+  width: fit-content;
+  max-width: min(80vw, 260px);
+  transform: rotate(-1deg);
+}
+
+.carousel-close {
+  padding: 0.45rem 0.85rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1;
+  transform: rotate(-0.75deg);
+}
+
+.carousel-arrow {
+  padding: 0.5rem 0.95rem;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1;
+  transform: rotate(0.35deg);
+}
+
+.carousel-controls .carousel-arrow:first-of-type {
+  transform: rotate(-0.65deg);
+}
+
+.footer-top:hover,
+.carousel-close:hover,
+.carousel-arrow:hover {
+  filter: brightness(1.05) saturate(1.04);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.1) inset,
+    0 12px 22px rgba(0, 0, 0, 0.3),
+    0 4px 6px rgba(0, 0, 0, 0.18);
+}
+
+.footer-top:hover {
+  transform: rotate(-0.4deg) translateY(-1px);
+}
+
+.carousel-close:hover {
+  transform: rotate(-0.35deg) translateY(-1px);
+}
+
+.carousel-controls .carousel-arrow:first-of-type:hover {
+  transform: rotate(-0.35deg) translateY(-1px);
+}
+
+.carousel-controls .carousel-arrow:last-of-type:hover {
+  transform: rotate(0.35deg) translateY(-1px);
+}
+
+.footer-top:active,
+.carousel-close:active,
+.carousel-arrow:active {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.38) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
+    0 1px 3px rgba(0, 0, 0, 0.22);
+}
+
+.footer-top:active {
+  transform: rotate(-0.2deg) translateY(1px);
+}
+
+.carousel-close:active {
+  transform: rotate(-0.2deg) translateY(1px);
+}
+
+.carousel-controls .carousel-arrow:first-of-type:active {
+  transform: rotate(-0.2deg) translateY(1px);
+}
+
+.carousel-controls .carousel-arrow:last-of-type:active {
+  transform: rotate(0.2deg) translateY(1px);
+}
+
+.footer-top:focus-visible,
+.carousel-close:focus-visible,
+.carousel-arrow:focus-visible {
+  outline: 2px dashed #1e231a;
+  outline-offset: 4px;
+}
+
+.footer-note {
+  margin: 0;
+  margin-top: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  opacity: 0.9;
+  color: inherit;
+  line-height: 1.25;
+}
+
+/* ===== MOBILE NAV SHEET (narrow screens) ===== */
+.mobile-panel {
+  display: none;
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 4400;
+  overflow: auto;
+}
+
+.mobile-panel.open {
+  display: block;
+}
+
+.mobile-menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  background: var(--nav-bg);
+  border-bottom: var(--border);
+}
+
+.mobile-left {
+  border-right: var(--border);
+  display: grid;
+}
+
+.mobile-section-button {
+  width: 100%;
+  border: 0;
+  background: var(--nav-bg);
+  text-align: center;
+  font: inherit;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1rem;
+  cursor: pointer;
+  border-top: var(--border);
+  min-height: 5.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f8f8f2;
+  transition: background-color 0.15s ease;
+}
+
+.mobile-section-button:hover:not(:has(.nav-label-img)) {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.mobile-section-button:active:not(:has(.nav-label-img)) {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mobile-panel .nav-label-img {
+  max-height: min(5rem, 18vw);
+}
+
+.mobile-left .mobile-section-button:first-child {
+  border-top: 0;
+}
+
+.mobile-right {
+  min-height: 0;
+  display: grid;
+}
+
+.mobile-right-list {
+  display: none;
+  height: 100%;
+}
+
+.mobile-right-list.open {
+  display: block;
+}
+
+.mobile-right-list .mobile-dropdown {
+  display: grid;
+  border: 0;
+  border-top: 0;
+  height: 100%;
+  grid-template-rows: repeat(3, minmax(5.2rem, auto));
+  align-content: start;
+}
+
+.mobile-right-list .mobile-dropdown li:first-child {
+  border-top: 0;
+}
+
+.mobile-right-list .mobile-dropdown li {
+  display: flex;
+}
+
+.mobile-right-list .mobile-dropdown a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mobile-left .mobile-section-button[aria-expanded="true"]:not(:has(.nav-label-img)) {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* ===== PORTFOLIO LIGHTBOX (opens when you click a portfolio image) =====
+   - Dimmed area uses same glass as .hero-intro (--hero-overlay-bg)
+   - Inner “card” matches main page background (--main-bg)
+*/
+.carousel-modal {
+  position: fixed;
+  inset: 0;
+  background: var(--hero-overlay-bg);
+  backdrop-filter: blur(var(--hero-overlay-blur));
+  -webkit-backdrop-filter: blur(var(--hero-overlay-blur));
+  display: none;
+  z-index: 4600;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.carousel-modal.open {
+  display: grid;
+  place-items: center;
+}
+
+/*
+  Lightbox “card” — no hard rectangle border; soft organic radius + shadows like .hero-intro.
+*/
+.carousel-shell {
+  width: min(92vw, 980px);
+  border: 0;
+  border-radius: 16px 11px 18px 13px;
+  background: var(--main-bg);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  display: grid;
+  gap: 0.7rem;
+  transform: rotate(-0.35deg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42) inset,
+    0 8px 26px rgba(0, 0, 0, 0.22),
+    0 2px 6px rgba(255, 255, 255, 0.14);
+}
+
+.carousel-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.carousel-media {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 68vh;
+  margin-inline: auto;
+  background: transparent;
+  box-shadow:
+    0 -6px 12px -14px rgba(0, 0, 0, 0.2),
+    0 6px 12px -14px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.carousel-caption {
+  text-align: center;
+  font-size: 1rem;
+  min-height: 1.25rem;
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .logo-wrap {
+    border-right: 0;
+  }
+
+  .logo-mark {
+    display: none;
+  }
+
+  .logo-toggle {
+    display: flex;
+  }
+
+  header,
+  section {
+    min-height: 100vh;
+  }
+
+  header h1 {
+    font-size: clamp(2.2rem, 10vw, 3.8rem);
+  }
+
+  .hero-intro {
+    width: min(92vw, 60ch);
+    font-size: clamp(0.84rem, 2.35vw, 0.92rem);
+    line-height: 1.2;
+  }
+
+  .name-last {
+    display: block;
+  }
+
+  .about-copy {
+    column-count: 1;
+  }
+
+  .portfolio-track figure:hover,
+  .portfolio-track figure:focus-within {
+    transform: scale(1.04);
+  }
+}
+
+@media (min-width: 901px) {
+  .section-inner {
+    padding-top: clamp(3.4rem, 6vw, 5rem);
+  }
+
+  #about .section-inner,
+  #portfolio .section-inner {
+    padding-top: clamp(4.8rem, 9vw, 6.8rem);
+    padding-bottom: clamp(7rem, 14vw, 10.5rem);
+  }
+
+  .mobile-panel {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .portfolio-track figure,
+  .portfolio-track figcaption {
+    transition: none;
+  }
+}
