@@ -27,8 +27,7 @@
   <link rel="icon" type="image/png" href="assets/am.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <!-- Main stylesheet: open styles.css; design tokens are at the top in :root -->
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Fragment+Mono:ital@0;1&family=Meddon&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body id="top">
@@ -48,20 +47,20 @@
     <ul class="desktop-nav" id="desktopNav">
       <li class="desktop-nav-item" data-section="contact">
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-contact">
-          <img class="nav-label-img" src="assets/contact.png" alt="Contact">
+          <p class="header-text">Contact</p>
         </button>
         <!-- Submenus (random emoji / color links): re-enable via ENABLE_SECTION_DROPDOWNS in script.js -->
         <ul class="dropdown" id="desk-contact"></ul>
       </li>
       <li class="desktop-nav-item" data-section="about">
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-about">
-          <img class="nav-label-img" src="assets/about.png" alt="About">
+          <p class="header-text">About</p>
         </button>
         <ul class="dropdown" id="desk-about"></ul>
       </li>
       <li class="desktop-nav-item" data-section="portfolio">
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-portfolio">
-          <img class="nav-label-img" src="assets/portfolio.png" alt="Portfolio">
+          <p class="header-text">Portfolio</p>
         </button>
         <ul class="dropdown" id="desk-portfolio"></ul>
       </li>
@@ -99,15 +98,24 @@
   <!-- ===== HERO: full-viewport image, name (h1), intro paragraph ===== -->
   <header>
     <div class="hero-inner">
-      <h1><span id="firstName">Aidan</span> <span class="name-last" id="lastName">McCauley</span></h1>
-      <!-- Filled from site-content.js → heroIntroText -->
-      <p class="hero-intro" id="heroIntro"></p>
+      <p class="hero-intro" id="heroIntro">I’m an advertising creative and artist who believes in getting hands-on with the work. This site is coded from scratch, not using a template—an ultralight space that reflects how I think and make. My approach to both art and advertising is the same: cut through the clutter, resist oversaturation, and create work that feels intentional, drawing from early internet nostalgia paired with modern clarity.</p>
     </div>
   </header>
 
   <!-- ===== MAIN CONTENT: id="content" is the skip-link target ===== -->
   <main id="content">
     <!-- Contact links (Instagram + email text comes partly from site-content.js) -->
+    <section id="mobile-intro" >
+      <div class="section-inner">
+        <div class="contact-wrap">
+          <div class="contact-links">
+            <p>
+              I’m an advertising creative and artist who believes in getting hands-on with the work. This site is coded from scratch, not using a template—an ultralight space that reflects how I think and make. My approach to both art and advertising is the same: cut through the clutter, resist oversaturation, and create work that feels intentional, drawing from early internet nostalgia paired with modern clarity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="contact" aria-labelledby="contact-heading">
       <div class="section-inner">
         <h2 id="contact-heading">Contact</h2>

@@ -41,7 +41,7 @@ window.SITE_CONTENT = {
    * the sentence (like "I'm") — that's fine.
    */
   heroIntroText:
-    "I'm an advertising creative and artist who believes in getting hands-on with the work. This site is coded from scratch, not using a template, and is an ultralight space that reflects how I think and make. My approach to both art and advertising is the same: cut through the clutter, resist oversaturation, and create work that feels intentional. This design draws from early internet nostalgia paired with modern clarity.",
+    "",
 
   /*
    * About section — the long paragraph on the About page.

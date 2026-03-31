@@ -14,8 +14,8 @@
 
   /* Brand / layout colors */
   --nav-height: 10vh;
-  --nav-bg: #6d7356;
-  --main-bg: #cdd7c5;
+  --nav-bg: #d0d9c7;
+  --main-bg: #6f715d;
   --content-max: 800px;
 
   /* Section padding inside <main> (each .section-inner) */
@@ -26,8 +26,8 @@
   --portfolio-track-gap: 1rem;
 
   /* Fonts — change names here; if using Google Fonts, update the <link> in index.html too. */
-  --font-body: "Barlow", Arial, Helvetica, sans-serif;
-  --font-heading: "Arial Black", "Arial Bold", Arial, Helvetica, sans-serif;
+  --font-body: "Fragment Mono", Arial, Helvetica, sans-serif;
+  --font-heading: "Fragment Mono", "Arial Bold", Arial, Helvetica, sans-serif;
 
   /*
     Dark glass behind hero paragraph + portfolio lightbox (full-screen dim).
@@ -55,6 +55,20 @@ body {
   line-height: 1.5;
   min-height: 100vh;
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #d0d9c7;
+    border: 1px solid #d0d9c7;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+
 
 /*
   No body::before frame — horizontal rules come from:
@@ -107,6 +121,15 @@ nav {
   z-index: 4500;
   display: flex;
   align-items: stretch;
+}
+
+.header-text {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 900;
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  color: black;
+  text-transform: uppercase;
 }
 
 .logo-wrap {
@@ -295,18 +318,29 @@ html.no-section-dropdowns .mobile-menu-grid {
 
 /* ===== HEADER (full-viewport hero + name + intro paragraph) ===== */
 header {
-  min-height: 100vh;
   border-bottom: var(--border);
   padding: calc(var(--nav-height) + 1.2rem) var(--section-pad-inline) 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  background-image: url("assets/homepageGraphic.png");
+  background-color: #6f715d;
+  background-image: url("assets/homepageGraphic.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+@media (max-width: 900px) {
+  header {
+    background-size: contain;
+    background-position: center;
+    height: 0;
+    padding-top: 61%;
+  }
 }
 
 .hero-inner {
@@ -319,7 +353,7 @@ header {
 }
 
 h1 {
-  font-size: clamp(3rem, 8vw, 6.8rem);
+  font-size: clamp(4rem, 12vw, 13.6rem);
   font-weight: 800;
   font-family: var(--font-heading);
   text-transform: uppercase;
@@ -335,25 +369,37 @@ header h1 {
     0 1px 0 color-mix(in srgb, var(--nav-bg) 72%, black 28%),
     0 3px 0 color-mix(in srgb, var(--nav-bg) 82%, black 18%),
     0 7px 14px color-mix(in srgb, var(--nav-bg) 55%, black 45%);
+  position: absolute;
+  bottom: -1rem;
+  right: var(--section-pad-inline);
+  text-align: right;
 }
 
 .hero-intro {
-  width: min(100%, 60ch);
+  width: 30%;
   margin: 0;
   padding: clamp(0.9rem, 2.1vw, 1.3rem) clamp(1rem, 2.2vw, 1.6rem);
-  font-size: clamp(0.86rem, 1.02vw, 0.96rem);
+  font-size: clamp(1rem, 1.02vw, 0.96rem);
   line-height: 1.22;
   letter-spacing: 0.01em;
   color: #f5f7ef;
   text-wrap: balance;
-  background: var(--hero-overlay-bg);
-  border-radius: 12px;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.52) inset,
-    0 8px 26px rgba(0, 0, 0, 0.22),
-    0 2px 6px rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(var(--hero-overlay-blur));
-  -webkit-backdrop-filter: blur(var(--hero-overlay-blur));
+  position: absolute;
+  top: calc(var(--nav-height) + 1.2rem);
+  left: var(--section-pad-inline);
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .hero-intro {
+    display: none;
+  }
+}
+
+@media (min-width: 901px) {
+  #mobile-intro {
+    display: none;
+  }
 }
 
 .name-last {
@@ -916,7 +962,7 @@ footer {
   flex: 1;
 }
 
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
   .desktop-nav {
     display: none;
   }
@@ -936,6 +982,11 @@ footer {
   header,
   section {
     min-height: 100vh;
+  }
+
+  header {
+    background-size: contain;
+    background-position: bottom;
   }
 
   header h1 {
@@ -960,9 +1011,9 @@ footer {
   .portfolio-track figure:focus-within {
     transform: scale(1.04);
   }
-}
+} */
 
-@media (min-width: 901px) {
+/* @media (min-width: 901px) { */
   .section-inner {
     padding-top: clamp(3.4rem, 6vw, 5rem);
   }
@@ -976,7 +1027,7 @@ footer {
   .mobile-panel {
     display: none !important;
   }
-}
+/* } */
 
 @media (prefers-reduced-motion: reduce) {
   html {
