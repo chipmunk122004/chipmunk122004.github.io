@@ -16,6 +16,7 @@
   --nav-height: 10vh;
   --nav-bg: #d0d9c7;
   --main-bg: #6f715d;
+  --main-text: #ecdff2;
   --content-max: 800px;
 
   /* Section padding inside <main> (each .section-inner) */
@@ -57,16 +58,16 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #d0d9c7;
-    border: 1px solid #d0d9c7;
+  background-color: #d0d9c7;
+  border: 1px solid #d0d9c7;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: black;
+  background-color: black;
 }
 
 
@@ -301,8 +302,8 @@ html.no-section-dropdowns .mobile-menu-grid {
   display: block;
 }
 
-.dropdown li + li,
-.mobile-dropdown li + li {
+.dropdown li+li,
+.mobile-dropdown li+li {
   border-top: var(--border);
 }
 
@@ -382,21 +383,25 @@ header h1 {
   font-size: clamp(1rem, 1.02vw, 0.96rem);
   line-height: 1.22;
   letter-spacing: 0.01em;
-  color: #f5f7ef;
+  color: var(--main-text);
   text-wrap: balance;
   position: absolute;
-  top: calc(var(--nav-height) + 1.2rem);
-  left: var(--section-pad-inline);
+  top: calc(var(--nav-height));
+  left: 0;
   text-align: left;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px), (max-height: 525px) {
   .hero-intro {
     display: none;
   }
 }
 
-@media (min-width: 901px) {
+#mobile-intro {
+  color: var(--main-text);
+}
+
+@media (min-width: 1001px) and (min-height: 526px) {
   #mobile-intro {
     display: none;
   }
@@ -454,6 +459,21 @@ section {
 #contact {
   display: flex;
   flex-direction: column;
+
+  border-bottom: var(--border);
+  padding: calc(var(--nav-height) + 1.2rem) var(--section-pad-inline) 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #6f715d;
+  background-image: url("assets/contact.png");
+  background-size: 40vw;
+  background-position: top;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
 }
 
 #portfolio {
@@ -473,13 +493,15 @@ section {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   gap: clamp(1.2rem, 3.2vw, 2rem);
   padding-top: clamp(1rem, 2.5vw, 1.65rem);
   padding-bottom: clamp(1.15rem, 2.8vw, 1.85rem);
 }
 
-#contact .section-inner > h2 {
+
+
+#contact .section-inner>h2 {
   padding-top: 0;
 }
 
@@ -494,7 +516,7 @@ section {
   padding-bottom: clamp(3.1rem, 7vw, 5.2rem);
 }
 
-#portfolio .section-inner > h2 {
+#portfolio .section-inner>h2 {
   margin-bottom: clamp(0.85rem, 2.2vw, 1.65rem);
 }
 
@@ -514,7 +536,7 @@ section {
   padding-top: 0.15rem;
 }
 
-#portfolio .section-inner > .portfolio-block + .portfolio-block {
+#portfolio .section-inner>.portfolio-block+.portfolio-block {
   margin-top: clamp(1.5rem, 3vw, 2.25rem);
 }
 
@@ -529,8 +551,18 @@ h2 {
 
 .contact-wrap {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
   width: 100%;
+  color: var(--main-text);
+}
+
+@media (max-width: 900px) {
+  .contact-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .contact-links {
@@ -647,14 +679,13 @@ h2 {
 footer {
   border-bottom: var(--border);
   min-height: 25.5vh;
-  padding: clamp(2.1rem, 5vw, 3.4rem) var(--section-pad-inline)
-    calc(6rem + env(safe-area-inset-bottom));
+  padding: clamp(2.1rem, 5vw, 3.4rem) var(--section-pad-inline) calc(6rem + env(safe-area-inset-bottom));
   display: grid;
   place-items: center;
   row-gap: 1em;
   text-align: center;
-  background: var(--nav-bg);
-  color: #f8f8f2;
+  background: var(--main-bg);
+  color: var(--main-text);
 }
 
 /*
@@ -1014,19 +1045,20 @@ footer {
 } */
 
 /* @media (min-width: 901px) { */
-  .section-inner {
-    padding-top: clamp(3.4rem, 6vw, 5rem);
-  }
+.section-inner {
+  padding-top: clamp(3.4rem, 6vw, 5rem);
+}
 
-  #about .section-inner,
-  #portfolio .section-inner {
-    padding-top: clamp(4.8rem, 9vw, 6.8rem);
-    padding-bottom: clamp(7rem, 14vw, 10.5rem);
-  }
+#about .section-inner,
+#portfolio .section-inner {
+  padding-top: clamp(4.8rem, 9vw, 6.8rem);
+  padding-bottom: clamp(7rem, 14vw, 10.5rem);
+}
 
-  .mobile-panel {
-    display: none !important;
-  }
+.mobile-panel {
+  display: none !important;
+}
+
 /* } */
 
 @media (prefers-reduced-motion: reduce) {

@@ -114,18 +114,6 @@
     document.getElementById("aboutCopy").textContent = aboutText;
     document.getElementById("footerNote").textContent = footerNote;
 
-    const instagramLink = document.getElementById("instagramLink");
-    instagramLink.href = profile.instagramUrl;
-    instagramLink.setAttribute("aria-label", "Visit " + fullName + " Instagram");
-    document.getElementById("instagramLabel").textContent = profile.instagramLabel;
-    document.getElementById("instagramHandle").textContent = profile.instagramHandle;
-
-    const emailLink = document.getElementById("emailLink");
-    emailLink.href = "mailto:" + profile.email;
-    emailLink.setAttribute("aria-label", "Email " + fullName);
-    document.getElementById("emailLabel").textContent = profile.emailLabel;
-    document.getElementById("emailAddress").textContent = profile.email;
-
     document.title = fullName;
     const desc = "Portfolio, contact details, and creative work by " + fullName + ".";
     document.querySelector("meta[name='description']").setAttribute("content", fullName + " - portfolio, contact, and about.");
