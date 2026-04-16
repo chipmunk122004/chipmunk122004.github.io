@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art — Aidan McCauley</title>
+  <meta name="description" content="Art portfolio by Aidan McCauley.">
+  <meta property="og:title" content="Art — Aidan McCauley">
+  <meta property="og:description" content="Art portfolio by Aidan McCauley.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/am.png">
+  <meta property="og:image:alt" content="Aidan McCauley logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Art — Aidan McCauley">
+  <meta name="twitter:description" content="Art portfolio by Aidan McCauley.">
+  <meta name="twitter:image" content="assets/am.png">
+  <link rel="icon" type="image/png" href="assets/am.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <nav aria-label="Primary">
+    <div class="logo-wrap">
+      <img class="logo-mark" src="assets/am.png" alt="" aria-hidden="true">
+      <button class="logo-toggle" id="logoToggle" aria-expanded="false" aria-controls="mobilePanel">
+        <img src="assets/am.png" alt="">
+        <span class="sr-only">Open section menu</span>
+      </button>
+    </div>
+
+    <ul class="desktop-nav" id="desktopNav">
+      <li class="desktop-nav-item" data-section="contact">
+        <button class="menu-button" type="button">
+          <p class="header-text">Contact</p>
+        </button>
+        <ul class="dropdown" id="desk-contact"></ul>
+      </li>
+      <li class="desktop-nav-item" data-section="about">
+        <button class="menu-button" type="button">
+          <p class="header-text">About</p>
+        </button>
+        <ul class="dropdown" id="desk-about"></ul>
+      </li>
+      <li class="desktop-nav-item" data-section="portfolio">
+        <button class="menu-button" type="button">
+          <p class="header-text">Portfolio</p>
+        </button>
+        <ul class="dropdown" id="desk-portfolio"></ul>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="mobile-panel" id="mobilePanel" aria-label="Mobile section menu">
+    <div class="mobile-menu-grid">
+      <div class="mobile-left">
+        <button class="mobile-section-button" type="button" data-section="contact">
+          <img class="nav-label-img" src="assets/contact.png" alt="Contact">
+        </button>
+        <button class="mobile-section-button" type="button" data-section="about">
+          <img class="nav-label-img" src="assets/about.png" alt="About">
+        </button>
+        <button class="mobile-section-button" type="button" data-section="portfolio">
+          <p class="header-text">Portfolio</p>
+        </button>
+      </div>
+      <div class="mobile-right">
+        <div class="mobile-right-list" id="mobile-group-contact" data-section="contact">
+          <ul class="mobile-dropdown" id="mobile-contact"></ul>
+        </div>
+        <div class="mobile-right-list" id="mobile-group-about" data-section="about">
+          <ul class="mobile-dropdown" id="mobile-about"></ul>
+        </div>
+        <div class="mobile-right-list" id="mobile-group-portfolio" data-section="portfolio">
+          <ul class="mobile-dropdown" id="mobile-portfolio"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="content">
+    <section id="art-gallery" aria-labelledby="art-heading">
+      <div class="section-inner">
+        <h2 id="art-heading">Art</h2>
+        <!-- Populated from site-content.js → artPortfolioItems via script.js -->
+        <div class="portfolio-track art-grid" id="portfolioTrackArt" aria-labelledby="art-heading"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer-note" id="footerNote"></p>
+  </footer>
+
+  <div class="carousel-modal" id="carouselModal" role="dialog" aria-modal="true" aria-label="Portfolio image viewer">
+    <div class="carousel-shell">
+      <div class="carousel-top">
+        <button class="carousel-close" id="carouselClose" type="button" aria-label="Close image viewer">X</button>
+      </div>
+      <img class="carousel-media" id="carouselMedia" src="" alt="">
+      <div class="carousel-controls">
+        <button class="carousel-arrow" id="carouselPrev" type="button" aria-label="Previous image">←</button>
+        <p class="carousel-caption" id="carouselCaption"></p>
+        <button class="carousel-arrow" id="carouselNext" type="button" aria-label="Next image">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="site-content.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

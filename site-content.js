@@ -75,28 +75,35 @@ window.SITE_CONTENT = {
   ],
 
   /*
-   * ADVERTISING portfolio — horizontal row labeled "Advertising".
-   * Same three fields as art: src, caption, alt.
+   * ADVERTISING portfolio — grid on the main page with hover-reveal effect.
+   * Each item is one card. Fields:
+   *
+   *   src     — the ad image (shown on hover, and in the full-screen lightbox)
+   *   logo    — image shown by default before hover (e.g. brand logo or campaign cover)
+   *             omit this field to show src directly with no hover swap
+   *   caption — short title shown in the lightbox
+   *   alt     — description of the ad for screen readers
+   *
+   * To add a new campaign, copy one { } block and update the paths.
+   * To add more pieces from the same campaign, repeat with the same logo path.
    */
   advertisingPortfolioItems: [
     {
-      src: "assets/advertising/mcCauley_1Password_001.png",
-      caption: "Advertising 001",
-      alt: "Describe this campaign piece for screen readers"
-    },
-    {
       src: "assets/advertising/mcCauley_1Password_002.png",
-      caption: "Advertising 002",
+      logo: "assets/advertising/mcCauley_1Password_001.png",
+      caption: "1Password — 01",
       alt: "Describe this campaign piece for screen readers"
     },
     {
       src: "assets/advertising/mcCauley_1Password_003.png",
-      caption: "Advertising 003",
+      logo: "assets/advertising/mcCauley_1Password_001.png",
+      caption: "1Password — 02",
       alt: "Describe this campaign piece for screen readers"
     },
     {
       src: "assets/advertising/mcCauley_1Password_004.png",
-      caption: "Advertising 004",
+      logo: "assets/advertising/mcCauley_1Password_001.png",
+      caption: "1Password — 03",
       alt: "Describe this campaign piece for screen readers"
     }
   ]

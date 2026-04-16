@@ -13,7 +13,7 @@
   --border: var(--border-width) solid var(--border-color);
 
   /* Brand / layout colors */
-  --nav-height: 10vh;
+  --nav-height: clamp(50px, 10vh, 90px);
   --nav-bg: #d0d9c7;
   --main-bg: #6f715d;
   --main-text: #ecdff2;
@@ -217,19 +217,25 @@ nav {
   border-right: var(--border);
 }
 
+.menu-button,
+.mobile-section-button {
+  font-weight: 900;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .menu-button {
   width: 100%;
   height: 100%;
   min-height: 0;
   border: 0;
   background: transparent;
-  cursor: pointer;
   font: inherit;
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   font-weight: 900;
   font-family: var(--font-heading);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,7 +276,6 @@ html.no-section-dropdowns .mobile-menu-grid {
 .menu-button:focus-visible,
 .logo-toggle:focus-visible,
 .mobile-section-button:focus-visible,
-.footer-top:focus-visible,
 .dropdown a:focus-visible,
 .mobile-dropdown a:focus-visible {
   outline: 2px dashed #000;
@@ -407,10 +412,6 @@ header h1 {
   }
 }
 
-.name-last {
-  display: inline;
-}
-
 /* ===== MAIN (contact / about / portfolio) ===== */
 main {
   background: var(--main-bg);
@@ -508,6 +509,7 @@ section {
 #portfolio .section-inner {
   min-height: 100%;
   justify-content: center;
+  width: min(100%, 1100px);
 }
 
 #about .section-inner,
@@ -675,6 +677,158 @@ h2 {
   opacity: 1;
 }
 
+/* ===== ART PORTFOLIO GRID (wrapping, art.html only) ===== */
+/* Overrides the horizontal-scroll .portfolio-track layout with a wrapping grid */
+#art-gallery .section-inner {
+  width: min(100%, 1100px);
+}
+
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: row;
+  overflow: visible;
+  padding: 0;
+}
+
+.art-grid img {
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+@media (max-width: 650px) {
+  .art-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 380px) {
+  .art-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== ADVERTISING GRID (hover logo → reveal ad) ===== */
+.ad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.ad-card {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border: var(--border);
+  background: var(--main-bg);
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.ad-card__reveal {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.ad-card__logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.35s ease;
+}
+
+.ad-card:hover .ad-card__logo,
+.ad-card:focus-visible .ad-card__logo {
+  opacity: 0;
+}
+
+.ad-card:focus-visible {
+  outline: 2px dashed var(--border-color);
+  outline-offset: 2px;
+}
+
+@media (max-width: 650px) {
+  .ad-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== OTHER WORK (secondary cards below advertising) ===== */
+.other-work {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.other-work-heading {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--main-text);
+  margin-bottom: clamp(0.8rem, 2vw, 1.25rem);
+  opacity: 0.72;
+}
+
+.other-work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.other-work-card {
+  display: block;
+  text-decoration: none;
+  color: var(--main-text);
+}
+
+.other-work-card__img-wrap {
+  overflow: hidden;
+  border: var(--border);
+  aspect-ratio: 4 / 3;
+}
+
+.other-work-card__img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s ease;
+}
+
+.other-work-card:hover .other-work-card__img-wrap img,
+.other-work-card:focus-visible .other-work-card__img-wrap img {
+  transform: scale(1.06);
+}
+
+.other-work-card__label {
+  margin-top: 0.5rem;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.other-work-card:focus-visible {
+  outline: 2px dashed var(--border-color);
+  outline-offset: 2px;
+}
+
+@media (max-width: 500px) {
+  .other-work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===== FOOTER (back-to-top + copyright) ===== */
 footer {
   border-bottom: var(--border);
@@ -689,10 +843,9 @@ footer {
 }
 
 /*
-  Skeuomorphic buttons — footer “up” + lightbox close/arrows share the same visual recipe.
+  Skeuomorphic buttons — lightbox close/arrows share the same visual recipe.
   Tweak gradient / shadows here to change all of them at once.
 */
-.footer-top,
 .carousel-close,
 .carousel-arrow {
   border: 0;
@@ -709,18 +862,6 @@ footer {
     0 3px 4px rgba(0, 0, 0, 0.16);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
   transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
-}
-
-.footer-top {
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
-  letter-spacing: 0.08em;
-  white-space: pre;
-  text-transform: uppercase;
-  padding: 0.7rem 1.15rem;
-  min-width: auto;
-  width: fit-content;
-  max-width: min(80vw, 260px);
-  transform: rotate(-1deg);
 }
 
 .carousel-close {
@@ -741,7 +882,6 @@ footer {
   transform: rotate(-0.65deg);
 }
 
-.footer-top:hover,
 .carousel-close:hover,
 .carousel-arrow:hover {
   filter: brightness(1.05) saturate(1.04);
@@ -750,10 +890,6 @@ footer {
     0 -1px 0 rgba(0, 0, 0, 0.1) inset,
     0 12px 22px rgba(0, 0, 0, 0.3),
     0 4px 6px rgba(0, 0, 0, 0.18);
-}
-
-.footer-top:hover {
-  transform: rotate(-0.4deg) translateY(-1px);
 }
 
 .carousel-close:hover {
@@ -768,17 +904,12 @@ footer {
   transform: rotate(0.35deg) translateY(-1px);
 }
 
-.footer-top:active,
 .carousel-close:active,
 .carousel-arrow:active {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.38) inset,
     0 -1px 0 rgba(0, 0, 0, 0.12) inset,
     0 1px 3px rgba(0, 0, 0, 0.22);
-}
-
-.footer-top:active {
-  transform: rotate(-0.2deg) translateY(1px);
 }
 
 .carousel-close:active {
@@ -793,7 +924,6 @@ footer {
   transform: rotate(0.2deg) translateY(1px);
 }
 
-.footer-top:focus-visible,
 .carousel-close:focus-visible,
 .carousel-arrow:focus-visible {
   outline: 2px dashed #1e231a;
@@ -850,10 +980,8 @@ footer {
   font: inherit;
   font-weight: 900;
   font-family: var(--font-heading);
-  text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 1rem;
-  cursor: pointer;
   border-top: var(--border);
   min-height: 5.2rem;
   display: flex;
@@ -993,58 +1121,6 @@ footer {
   flex: 1;
 }
 
-/* @media (max-width: 900px) {
-  .desktop-nav {
-    display: none;
-  }
-
-  .logo-wrap {
-    border-right: 0;
-  }
-
-  .logo-mark {
-    display: none;
-  }
-
-  .logo-toggle {
-    display: flex;
-  }
-
-  header,
-  section {
-    min-height: 100vh;
-  }
-
-  header {
-    background-size: contain;
-    background-position: bottom;
-  }
-
-  header h1 {
-    font-size: clamp(2.2rem, 10vw, 3.8rem);
-  }
-
-  .hero-intro {
-    width: min(92vw, 60ch);
-    font-size: clamp(0.84rem, 2.35vw, 0.92rem);
-    line-height: 1.2;
-  }
-
-  .name-last {
-    display: block;
-  }
-
-  .about-copy {
-    column-count: 1;
-  }
-
-  .portfolio-track figure:hover,
-  .portfolio-track figure:focus-within {
-    transform: scale(1.04);
-  }
-} */
-
-/* @media (min-width: 901px) { */
 .section-inner {
   padding-top: clamp(3.4rem, 6vw, 5rem);
 }
@@ -1059,15 +1135,22 @@ footer {
   display: none !important;
 }
 
-/* } */
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .portfolio-track figure,
-  .portfolio-track figcaption {
+  .portfolio-track figcaption,
+  .ad-card__logo,
+  .other-work-card__img-wrap img {
     transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .portfolio-track img,
+  #portfolioTrackAdvertising img {
+    height: 220px;
   }
 }

@@ -37,10 +37,9 @@
   ];
 
   const defaultAdvertisingPortfolioItems = [
-    { src: "assets/advertising/mcCauley_1Password_001.png", caption: "Advertising 001", alt: "Advertising work sample 001" },
-    { src: "assets/advertising/mcCauley_1Password_002.png", caption: "Advertising 002", alt: "Advertising work sample 002" },
-    { src: "assets/advertising/mcCauley_1Password_003.png", caption: "Advertising 003", alt: "Advertising work sample 003" },
-    { src: "assets/advertising/mcCauley_1Password_004.png", caption: "Advertising 004", alt: "Advertising work sample 004" }
+    { src: "assets/advertising/mcCauley_1Password_002.png", logo: "assets/advertising/mcCauley_1Password_001.png", caption: "1Password — 01", alt: "1Password advertising campaign, piece 1" },
+    { src: "assets/advertising/mcCauley_1Password_003.png", logo: "assets/advertising/mcCauley_1Password_001.png", caption: "1Password — 02", alt: "1Password advertising campaign, piece 2" },
+    { src: "assets/advertising/mcCauley_1Password_004.png", logo: "assets/advertising/mcCauley_1Password_001.png", caption: "1Password — 03", alt: "1Password advertising campaign, piece 3" }
   ];
 
   const content = window.SITE_CONTENT || {};
@@ -71,7 +70,9 @@
     ? content.advertisingPortfolioItems
     : defaultAdvertisingPortfolioItems;
 
-  const portfolioCarouselItems = artPortfolioItems.concat(advertisingPortfolioItems);
+  // Carousel items depend on page: art items on art.html, ad items on index.
+  const onArtPage = !!document.getElementById("portfolioTrackArt");
+  const portfolioCarouselItems = onArtPage ? artPortfolioItems : advertisingPortfolioItems;
 
   const sectionTargets = {
     contact: "#contact",
@@ -108,11 +109,11 @@
 
   function applyEditableContent() {
     const fullName = (profile.firstName + " " + profile.lastName).trim();
-    document.getElementById("firstName").textContent = profile.firstName;
-    document.getElementById("lastName").textContent = profile.lastName;
-    document.getElementById("heroIntro").textContent = heroIntroText;
-    document.getElementById("aboutCopy").textContent = aboutText;
-    document.getElementById("footerNote").textContent = footerNote;
+    const heroIntroEl = document.getElementById("heroIntro");
+    if (heroIntroEl) heroIntroEl.textContent = heroIntroText;
+    if (aboutCopyEl) aboutCopyEl.textContent = aboutText;
+    const footerNoteEl = document.getElementById("footerNote");
+    if (footerNoteEl) footerNoteEl.textContent = footerNote;
 
     document.title = fullName;
     const desc = "Portfolio, contact details, and creative work by " + fullName + ".";
@@ -220,6 +221,8 @@
     if (targetSection) {
       closeAllMenus(false);
       scrollToSection(targetSection);
+    } else if (targetHash) {
+      window.location.href = "index.html" + targetHash;
     }
   }
 
@@ -278,11 +281,35 @@
   }
 
   appendToPortfolioTrack(document.getElementById("portfolioTrackArt"), artPortfolioItems, 0);
-  appendToPortfolioTrack(
-    document.getElementById("portfolioTrackAdvertising"),
-    advertisingPortfolioItems,
-    artPortfolioItems.length
-  );
+
+  function appendToAdGrid(gridEl, items) {
+    if (!gridEl) return;
+    items.forEach(function(item, i) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "ad-card";
+      btn.setAttribute("aria-label", "Open " + (item.caption || "campaign piece") + " in viewer");
+
+      const revealImg = document.createElement("img");
+      revealImg.className = "ad-card__reveal";
+      revealImg.src = item.src;
+      revealImg.alt = item.alt || "";
+      btn.appendChild(revealImg);
+
+      if (item.logo) {
+        const logoImg = document.createElement("img");
+        logoImg.className = "ad-card__logo";
+        logoImg.src = item.logo;
+        logoImg.alt = "";
+        btn.appendChild(logoImg);
+      }
+
+      btn.addEventListener("click", function() { openCarousel(i); });
+      gridEl.appendChild(btn);
+    });
+  }
+
+  appendToAdGrid(document.getElementById("adGrid"), advertisingPortfolioItems);
 
   logoToggle.addEventListener("click", function () {
     const next = !mobilePanel.classList.contains("open");
@@ -353,11 +380,6 @@
     if (!event.target.closest("nav") && !event.target.closest("#mobilePanel")) {
       closeAllMenus(true);
     }
-  });
-
-  const backToTop = document.getElementById("backToTop");
-  backToTop.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: getScrollBehavior() });
   });
 
   /* Lightbox: looks (overlay, buttons) are 100% CSS in styles.css — no random colors here */

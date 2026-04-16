@@ -27,7 +27,7 @@
   <link rel="icon" type="image/png" href="assets/am.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Fragment+Mono:ital@0;1&family=Meddon&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body id="top">
@@ -78,7 +78,7 @@
           <img class="nav-label-img" src="assets/about.png" alt="About">
         </button>
         <button class="mobile-section-button" type="button" data-section="portfolio" aria-expanded="false" aria-controls="mobile-group-portfolio">
-          <img class="nav-label-img" src="assets/portfolio.png" alt="Portfolio">
+          <p class="header-text">Portfolio</p>
         </button>
       </div>
       <div class="mobile-right">
@@ -147,17 +147,31 @@
       </div>
     </section>
 
-    <!-- Portfolio: tracks are empty here; script.js fills them from site-content.js lists -->
+    <!-- Portfolio: advertising grid with hover-reveal effect; other work links below -->
     <section id="portfolio" aria-labelledby="portfolio-heading">
       <div class="section-inner">
-        <h2 id="portfolio-heading">Portfolio</h2>
-        <div class="portfolio-block">
-          <h3 id="portfolio-art-heading" class="portfolio-subheading">Art</h3>
-          <div class="portfolio-track" id="portfolioTrackArt" aria-labelledby="portfolio-art-heading"></div>
-        </div>
-        <div class="portfolio-block">
-          <h3 id="portfolio-advertising-heading" class="portfolio-subheading">Advertising</h3>
-          <div class="portfolio-track" id="portfolioTrackAdvertising" aria-labelledby="portfolio-advertising-heading"></div>
+        <h2 id="portfolio-heading">Advertising</h2>
+        <!-- Populated from site-content.js → advertisingPortfolioItems via script.js -->
+        <!-- Each item: { src, logo, caption, alt } — hover swaps logo→ad, click opens lightbox -->
+        <div class="ad-grid" id="adGrid"></div>
+
+        <!-- Secondary section: links to other portfolio pages -->
+        <div class="other-work">
+          <h3 class="other-work-heading">Check out my other work</h3>
+          <div class="other-work-grid">
+            <a class="other-work-card" href="art.html">
+              <div class="other-work-card__img-wrap">
+                <img src="assets/art/am_001.jpg" alt="View art portfolio">
+              </div>
+              <p class="other-work-card__label">Art</p>
+            </a>
+            <a class="other-work-card" href="lego.html">
+              <div class="other-work-card__img-wrap">
+                <img src="assets/art/am_003.jpg" alt="View Lego portfolio">
+              </div>
+              <p class="other-work-card__label">Legos</p>
+            </a>
+          </div>
         </div>
       </div>
     </section>
