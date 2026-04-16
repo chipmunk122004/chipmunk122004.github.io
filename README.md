@@ -201,7 +201,7 @@ If the font does not change, double-check that the name in **`styles.css`** matc
 **Shortcuts for this project:**
 
 - **`index.html`** must stay at the **root** of the repo, with **`assets/`** uploaded too.
-- **Sharing previews** (Facebook, iMessage, etc.): after your real **`https://…`** address works, you can set **`og:image`** and **`twitter:image`** in **`index.html`** to full URLs like `https://www.yoursite.com/assets/am.png` for the most reliable previews.
+- **Sharing previews** (Facebook, iMessage, etc.): after your real **`https://…`** address works, you can set **`og:image`** and **`twitter:image`** in **`index.html`** to full URLs like `https://www.yoursite.com/assets/AM.svg` for the most reliable previews.
 - **`404.html`:** GitHub Pages uses it for missing URLs. The “Back to home” link is **`/`**, which fits a **custom domain at the root**. If you only use **`https://username.github.io/repository-name/`**, open **`404.html`** and change that link to **`/repository-name/`**.
 
 ---

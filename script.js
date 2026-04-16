@@ -25,10 +25,9 @@
       email: "aidan@example.com"
     },
     heroIntroText:
-      "I'm an advertising creative and artist who believes in getting hands-on with the work. This site is coded from scratch, not using a template, and is an ultralight space that reflects how I think and make. My approach to both art and advertising is the same: cut through the clutter, resist oversaturation, and create work that feels intentional. This design draws from early internet nostalgia paired with modern clarity.",
+      "I am an advertising creative / artist who believes in getting hands-on with the work. This site is coded from scratch, not using a template, an ultralight space that reflects how I think and make. My approach to both advertising and art is the same: cut through the clutter and create intentional work, drawing from early internet nostalgia paired with modern clarity.",
     aboutText:
       "Edit the long About paragraph in site-content.js (look for aboutText). Save the file and refresh the page.",
-    footerNote: "© 2026 Aidan McCauley. Thanks for dropping by."
   };
 
   const defaultArtPortfolioItems = [
@@ -56,9 +55,7 @@
   const aboutFromFile =
     typeof content.aboutText === "string" ? content.aboutText.trim() : "";
   const aboutText = aboutFromFile || aboutFromDom || defaultContent.aboutText;
-  const footerNote = typeof content.footerNote === "string" && content.footerNote.trim()
-    ? content.footerNote
-    : defaultContent.footerNote;
+
 
   const artPortfolioItems = Array.isArray(content.artPortfolioItems) && content.artPortfolioItems.length
     ? content.artPortfolioItems
@@ -112,8 +109,6 @@
     const heroIntroEl = document.getElementById("heroIntro");
     if (heroIntroEl) heroIntroEl.textContent = heroIntroText;
     if (aboutCopyEl) aboutCopyEl.textContent = aboutText;
-    const footerNoteEl = document.getElementById("footerNote");
-    if (footerNoteEl) footerNoteEl.textContent = footerNote;
 
     document.title = fullName;
     const desc = "Portfolio, contact details, and creative work by " + fullName + ".";

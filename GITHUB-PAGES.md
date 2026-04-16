@@ -154,7 +154,7 @@ Visitors should then use **`https://`** links.
 
 2. **Social previews (optional)**  
    In **`index.html`**, `og:image` and `twitter:image` can be updated to full URLs like  
-   `https://www.yourdomain.com/assets/am.png`  
+   `https://www.yourdomain.com/assets/AM.svg`  
    so apps like Messages or Facebook show a reliable preview.
 
 ---

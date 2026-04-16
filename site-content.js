@@ -48,10 +48,13 @@ window.SITE_CONTENT = {
    * Paste your bio as one block of text.
    */
   aboutText:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis sem ut mi posuere tincidunt. Nam rutrum placerat turpis, id congue elit consequat ut. Mauris ut justo non urna ultrices aliquet. Nulla facilisi. Donec posuere sem a mi luctus, non gravida nibh egestas. Curabitur vel dui malesuada, volutpat est ac, luctus mi. Vivamus ultrices, ex at bibendum convallis, dui justo mattis nibh, in vulputate ipsum est vel turpis. Integer accumsan urna at dui feugiat consequat. Proin fringilla sodales arcu, sed viverra felis iaculis eget. Suspendisse potenti. Cras quis feugiat nisi. In hac habitasse platea dictumst. Maecenas viverra dui vitae odio venenatis, id suscipit magna laoreet. Donec nec risus imperdiet, consectetur magna at, luctus justo. Duis non nisi et metus iaculis ullamcorper. Morbi posuere porttitor dolor vel euismod. Nulla vehicula augue erat, eget posuere massa interdum vitae. Cras eu felis ac tortor feugiat faucibus. Duis vel neque non nisi volutpat rhoncus. Donec sodales lectus sed risus gravida, ac aliquet magna feugiat. Sed posuere cursus lectus, vitae vulputate ipsum suscipit sit amet. Suspendisse eget sem et diam elementum vulputate ut id odio. Vivamus sit amet metus efficitur, placerat nulla ac, bibendum eros. Aliquam erat volutpat.",
+    `I am someone who values intentionality. When it comes to my work, I feel inspired by valuing the process. I appreciate bridging the gap between digital design and the human hand. 
 
-  /* Small line at the bottom of the page (copyright or thank-you line) */
-  footerNote: "© 2026 Aidan McCauley. Thanks for dropping by.",
+There is no better start to the day than waking up early, moving methodically, and then going on a run before the day fully starts. I can talk your ear off about being an adult fan of Lego, Impressionist art, the writings of C.S. Lewis and Tolkien, or album cover design. 
+
+I see advertising as the intersection of both sides of my brain: Solving problems and enjoying the process paired with creativity and intentionality. 
+`,
+
 
   /*
    * ART portfolio — horizontal row labeled "Art" on the site.
@@ -96,13 +99,13 @@ window.SITE_CONTENT = {
     },
     {
       src: "assets/advertising/mcCauley_1Password_003.png",
-      logo: "assets/advertising/mcCauley_1Password_001.png",
+      logo: "assets/BFOLogo2026.png",
       caption: "1Password — 02",
       alt: "Describe this campaign piece for screen readers"
     },
     {
       src: "assets/advertising/mcCauley_1Password_004.png",
-      logo: "assets/advertising/mcCauley_1Password_001.png",
+      logo: "assets/SEVENELEVENLOGO.png",
       caption: "1Password — 03",
       alt: "Describe this campaign piece for screen readers"
     }
