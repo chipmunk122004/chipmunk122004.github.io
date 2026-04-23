@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteContent } from '../content/config.js';
+
+const { artPortfolioItems } = siteContent;
+---
+<Layout
+  title="Art — Aidan McCauley"
+  description="Art portfolio by Aidan McCauley."
+  footerNote=""
+>
+  <main id="content">
+    <section id="art-gallery" aria-labelledby="art-heading">
+      <div class="section-inner">
+        <h2 id="art-heading">Art</h2>
+        <div class="portfolio-track art-grid" id="portfolioTrackArt" aria-labelledby="art-heading">
+          {artPortfolioItems.map((item) => (
+            <figure>
+              <button
+                type="button"
+                style="border:0;background:transparent;padding:0;cursor:pointer;"
+                aria-label={`Open ${item.caption} in image carousel`}
+                data-carousel-src={item.src}
+                data-carousel-caption={item.caption}
+                data-carousel-alt={item.alt}
+              >
+                <img src={item.src} alt={item.alt} />
+              </button>
+              <figcaption>{item.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

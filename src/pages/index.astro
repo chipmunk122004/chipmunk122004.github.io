@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteContent } from '../content/config.js';
+
+const { profile, heroIntroText, aboutText, footerNote, advertisingPortfolioItems } = siteContent;
+const fullName = `${profile.firstName} ${profile.lastName}`;
+---
+<Layout
+  title={fullName}
+  description={`${fullName} - portfolio, contact, and about.`}
+  ogDescription={`Portfolio, contact details, and creative work by ${fullName}.`}
+  footerNote={footerNote}
+  includeCarousel={false}
+>
+  <header>
+    <div class="hero-inner">
+      <p class="hero-intro" id="heroIntro">{heroIntroText}</p>
+    </div>
+  </header>
+
+  <main id="content">
+    <section id="mobile-intro">
+      <div class="section-inner">
+        <div class="contact-wrap">
+          <div class="contact-links">
+            <p>{heroIntroText}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="section-inner">
+        <div class="contact-wrap"></div>
+        <div class="contact-wrap">
+          <div>
+            <img src="/assets/Email.png" alt="email graphic" class="contact-icon">
+            <p>
+              <a href={`mailto:${profile.email}`} aria-label="Email">
+                {profile.email}
+              </a>
+            </p>
+          </div>
+          <div>
+            <img src="/assets/Phone.png" alt="phone graphic" class="contact-icon">
+            <p>
+              <a href={`tel:${profile.phone}`} target="_blank" rel="noreferrer" aria-label="Phone">
+                {profile.phone}
+              </a>
+            </p>
+          </div>
+          <div>
+            <img src="/assets/LinkedIn.png" alt="LinkedIn graphic" class="contact-icon">
+            <p>
+              <a href={profile.linkedinUrl} aria-label="LinkedIn">
+                LinkedIn
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-inner">
+        <div class="about-wrap">
+          <h2>About</h2>
+          <p class="about-copy" id="aboutCopy">{aboutText}</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="section-inner">
+        <h2 id="portfolio-heading">Advertising</h2>
+        <div class="ad-grid" id="adGrid">
+          {advertisingPortfolioItems.map((item) => (
+            <a
+              class="ad-card"
+              href={`/advertising/${item.slug}`}
+              aria-label={`View ${item.caption} campaign`}
+            >
+              <img class="ad-card__reveal" src={item.src} alt={item.alt} />
+              {item.logo && (
+                <img class="ad-card__logo" src={item.logo} alt="" />
+              )}
+            </a>
+          ))}
+        </div>
+
+        <div class="other-work">
+          <h3 class="other-work-heading">Check out my other work</h3>
+          <div class="other-work-grid">
+            <a class="other-work-card" href="/art">
+              <div class="other-work-card__img-wrap">
+                <img src="/assets/art/am_001.jpg" alt="View art portfolio">
+              </div>
+              <p class="other-work-card__label">Art</p>
+            </a>
+            <a class="other-work-card" href="/lego">
+              <div class="other-work-card__img-wrap">
+                <img src="/assets/art/am_003.jpg" alt="View Lego portfolio">
+              </div>
+              <p class="other-work-card__label">Legos</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

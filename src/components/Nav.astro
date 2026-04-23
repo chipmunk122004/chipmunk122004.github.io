@@ -1,0 +1,59 @@
+---
+---
+<nav aria-label="Primary">
+  <div class="logo-wrap">
+    <img class="logo-mark" src="/assets/AM.svg" alt="" aria-hidden="true">
+    <button class="logo-toggle" id="logoToggle" aria-expanded="false" aria-controls="mobilePanel">
+      <img src="/assets/AM.svg" alt="Aidan McCauley logo">
+      <span class="sr-only">Open section menu</span>
+    </button>
+  </div>
+
+  <ul class="desktop-nav" id="desktopNav">
+    <li class="desktop-nav-item" data-section="contact">
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-contact">
+        <p class="header-text">Contact</p>
+      </button>
+      <ul class="dropdown" id="desk-contact"></ul>
+    </li>
+    <li class="desktop-nav-item" data-section="about">
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-about">
+        <p class="header-text">About</p>
+      </button>
+      <ul class="dropdown" id="desk-about"></ul>
+    </li>
+    <li class="desktop-nav-item" data-section="portfolio">
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="desk-portfolio">
+        <p class="header-text">Portfolio</p>
+      </button>
+      <ul class="dropdown" id="desk-portfolio"></ul>
+    </li>
+  </ul>
+</nav>
+
+<div class="mobile-panel" id="mobilePanel" aria-label="Mobile section menu">
+  <div class="mobile-menu-grid">
+    <div class="mobile-left">
+      <button class="mobile-section-button" type="button" data-section="contact" aria-expanded="false" aria-controls="mobile-group-contact">
+        <img class="nav-label-img" src="/assets/contact.png" alt="Contact">
+      </button>
+      <button class="mobile-section-button" type="button" data-section="about" aria-expanded="false" aria-controls="mobile-group-about">
+        <img class="nav-label-img" src="/assets/about.png" alt="About">
+      </button>
+      <button class="mobile-section-button" type="button" data-section="portfolio" aria-expanded="false" aria-controls="mobile-group-portfolio">
+        <p class="header-text">Portfolio</p>
+      </button>
+    </div>
+    <div class="mobile-right">
+      <div class="mobile-right-list" id="mobile-group-contact" data-section="contact">
+        <ul class="mobile-dropdown" id="mobile-contact"></ul>
+      </div>
+      <div class="mobile-right-list" id="mobile-group-about" data-section="about">
+        <ul class="mobile-dropdown" id="mobile-about"></ul>
+      </div>
+      <div class="mobile-right-list" id="mobile-group-portfolio" data-section="portfolio">
+        <ul class="mobile-dropdown" id="mobile-portfolio"></ul>
+      </div>
+    </div>
+  </div>
+</div>
