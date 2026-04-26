@@ -330,6 +330,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   align-items: center;
   background-color: #6f715d;
   background-image: url("/assets/Homepage_Graphic.png");
@@ -339,6 +340,7 @@ header {
   position: relative;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
 
 @media (max-width: 900px) {
@@ -380,11 +382,14 @@ header h1 {
   font-size: min(15vw, 30vh);
   letter-spacing: 0.02em;
   white-space: nowrap;
-  text-shadow: 3px 3px 0 black;
+  font-family: "Helvetica Neue Condensed Bold", "HelveticaNeue-CondensedBold", "Arial Narrow", sans-serif;
+  font-weight: bold;
+  font-stretch: condensed;
   position: absolute;
-  bottom: -2vw;
+  bottom: -2.4vw;
   right: -0.2vw;
   text-align: right;
+  z-index: 0;
 }
 
 header h1 .hero-first {
