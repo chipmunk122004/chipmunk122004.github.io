@@ -32,31 +32,32 @@ const fullName = `${profile.firstName} ${profile.lastName}`;
 
     <section id="contact" aria-labelledby="contact-heading">
       <div class="section-inner">
-        <div class="contact-wrap"></div>
-        <div class="contact-wrap">
-          <div>
-            <img src="/assets/Email.png" alt="email graphic" class="contact-icon">
-            <p>
+        <div class="blueprint-frame">
+          <span class="bp-top-ticks"></span>
+          <span class="bp-bottom-ticks"></span>
+          <span class="bp-grid"></span>
+          <span class="bp-measure-label">S-26</span>
+          <div class="contact-wrap">
+            <div class="bp-contact-col">
               <a href={`mailto:${profile.email}`} aria-label="Email">
-                {profile.email}
+                <img src="/assets/Email.png" alt="email graphic" class="contact-icon">
+                <p>{profile.email}</p>
               </a>
-            </p>
-          </div>
-          <div>
-            <img src="/assets/Phone.png" alt="phone graphic" class="contact-icon">
-            <p>
+            </div>
+            <span class="bp-vdivider"></span>
+            <div class="bp-contact-col">
               <a href={`tel:${profile.phone}`} target="_blank" rel="noreferrer" aria-label="Phone">
-                {profile.phone}
+                <img src="/assets/Phone.png" alt="phone graphic" class="contact-icon">
+                <p>{profile.phone}</p>
               </a>
-            </p>
-          </div>
-          <div>
-            <img src="/assets/LinkedIn.png" alt="LinkedIn graphic" class="contact-icon">
-            <p>
+            </div>
+            <span class="bp-vdivider"></span>
+            <div class="bp-contact-col">
               <a href={profile.linkedinUrl} aria-label="LinkedIn">
-                LinkedIn
+                <img src="/assets/LinkedIn.png" alt="LinkedIn graphic" class="contact-icon">
+                <p>LinkedIn</p>
               </a>
-            </p>
+            </div>
           </div>
         </div>
       </div>
