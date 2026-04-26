@@ -118,7 +118,7 @@ nav {
   position: fixed;
   inset: 0 0 auto 0;
   height: var(--nav-height);
-  border-bottom: var(--border);
+  border-bottom: calc(var(--border-width) * 2) solid var(--border-color);
   background: var(--nav-bg);
   z-index: 4500;
   display: flex;
@@ -135,7 +135,6 @@ nav {
 }
 
 .logo-wrap {
-  border-right: var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,6 +143,18 @@ nav {
   min-height: 0;
   padding: 1.5vh 2.8rem;
   background: var(--nav-bg);
+  position: relative;
+}
+
+.logo-wrap::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 90%;
+  width: calc(var(--border-width) * 2);
+  background: var(--border-color);
+  pointer-events: none;
 }
 
 .logo-mark {
@@ -206,16 +217,33 @@ nav {
   flex: 1;
   min-width: 0;
   min-height: 0;
-  border-left: var(--border);
   position: relative;
 }
 
-.desktop-nav-item:first-child {
-  border-left: 0;
+.desktop-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 90%;
+  width: calc(var(--border-width) * 2);
+  background: var(--border-color);
+  pointer-events: none;
 }
 
-.desktop-nav-item:last-child {
-  border-right: var(--border);
+.desktop-nav-item:first-child::before {
+  display: none;
+}
+
+.desktop-nav-item:last-child::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 90%;
+  width: calc(var(--border-width) * 2);
+  background: var(--border-color);
+  pointer-events: none;
 }
 
 .menu-button,
