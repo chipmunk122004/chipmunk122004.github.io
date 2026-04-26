@@ -28,7 +28,7 @@
 
   /* Fonts — change names here; if using Google Fonts, update the <link> in index.html too. */
   --font-body: Helvetica, "Inter", sans-serif;
-  --font-heading: Helvetica, "Inter", sans-serif;
+  --font-heading: "Helvetica Neue Condensed Bold", "HelveticaNeue-CondensedBold", "Inter", "Arial Narrow", sans-serif;
 
   /*
     Dark glass behind hero paragraph + portfolio lightbox (full-screen dim).
@@ -126,7 +126,7 @@ nav {
 }
 
 .header-text {
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-size: clamp(1.5rem, 2.7vw, 1.8rem);
   font-weight: 900;
   font-family: var(--font-heading);
   letter-spacing: 0.08em;
